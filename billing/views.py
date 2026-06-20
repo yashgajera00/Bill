@@ -128,10 +128,12 @@ def login_view(request):
             
     return JsonResponse({'error': 'Method not allowed.'}, status=405)
 
+@csrf_exempt
 def logout_view(request):
     logout(request)
     return JsonResponse({'success': True})
 
+@csrf_exempt
 @api_login_required
 def company_settings(request):
     company = Company.objects.first()
@@ -159,6 +161,7 @@ def company_settings(request):
             
     return JsonResponse({'error': 'Method not allowed.'}, status=405)
 
+@csrf_exempt
 @api_login_required
 def customer_list(request):
     query = request.GET.get('q', '')
@@ -177,6 +180,7 @@ def customer_get(request, pk):
     customer = get_object_or_404(Customer, pk=pk)
     return JsonResponse(serialize_customer(customer))
 
+@csrf_exempt
 @api_login_required
 def customer_add(request):
     if request.method == 'POST':
@@ -192,6 +196,7 @@ def customer_add(request):
             return JsonResponse({'error': str(e)}, status=400)
     return JsonResponse({'error': 'Method not allowed.'}, status=405)
 
+@csrf_exempt
 @api_login_required
 def customer_edit(request, pk):
     customer = get_object_or_404(Customer, pk=pk)
@@ -208,6 +213,7 @@ def customer_edit(request, pk):
             return JsonResponse({'error': str(e)}, status=400)
     return JsonResponse({'error': 'Method not allowed.'}, status=405)
 
+@csrf_exempt
 @api_login_required
 def customer_delete(request, pk):
     customer = get_object_or_404(Customer, pk=pk)
@@ -238,6 +244,7 @@ def customer_history(request, pk):
         'invoices': serialized_invoices
     })
 
+@csrf_exempt
 @api_login_required
 def invoice_list(request):
     q_bill = request.GET.get('q_bill', '')
@@ -316,6 +323,7 @@ def invoice_add(request):
             return JsonResponse({'error': str(e)}, status=400)
     return JsonResponse({'error': 'Method not allowed.'}, status=405)
 
+@csrf_exempt
 @api_login_required
 def invoice_edit(request, pk):
     invoice = get_object_or_404(Invoice, pk=pk)
@@ -375,6 +383,7 @@ def invoice_view(request, pk):
     
     return JsonResponse(serialized_invoice)
 
+@csrf_exempt
 @api_login_required
 @xframe_options_exempt
 def invoice_pdf(request, pk):
@@ -391,6 +400,7 @@ def invoice_pdf(request, pk):
     response['Content-Disposition'] = f'inline; filename="{filename}"'
     return response
 
+@csrf_exempt
 @api_login_required
 def invoice_delete(request, pk):
     invoice = get_object_or_404(Invoice, pk=pk)
@@ -401,6 +411,7 @@ def invoice_delete(request, pk):
     return JsonResponse({'error': 'Method not allowed.'}, status=405)
 
 
+@csrf_exempt
 @api_login_required
 @xframe_options_exempt
 def invoice_pdf_bulk(request):
