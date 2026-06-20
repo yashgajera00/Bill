@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: 'https://yashgajera00.pythonanywhere.com/api',
   withCredentials: true, // Crucial for Django session cookie authentication
 });
 
