@@ -269,6 +269,7 @@ def invoice_list(request):
         })
     return JsonResponse(serialized, safe=False)
 
+@csrf_exempt
 @api_login_required
 def invoice_add(request):
     if request.method == 'POST':
