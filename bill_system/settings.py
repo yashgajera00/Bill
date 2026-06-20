@@ -89,3 +89,5 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
     "https://embro-bill.vercel.app",
 ]
+
+CORS_ALLOW_CREDENTIALS = True
